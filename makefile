@@ -2,7 +2,7 @@ CC=g++
 STD=c++11
 CFLAGS=-Wall -Wextra -std=$(STD)
 
-TARGET_NAME=./tp2
+TARGET_NAME=tp2
 TMPOUT_NAME=tp2.testresult
 BUILD_PATH=./build
 SOURCE_PATH=./src
