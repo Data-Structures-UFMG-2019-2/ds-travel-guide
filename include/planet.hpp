@@ -1,3 +1,6 @@
+#ifndef PLANET_H
+#define PLANET_H
+
 #include<string>
 
 class Planet {
@@ -10,3 +13,5 @@ class Planet {
         std::string get_name();
         int get_time();
 };
+
+#endif
