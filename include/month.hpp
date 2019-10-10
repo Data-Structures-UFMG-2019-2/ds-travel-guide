@@ -5,11 +5,14 @@
 
 class month{
     private:
-        Planet* planets;
+        static int max_time;
+        int planets_num;
+        Planet** planets;
     public:
-        month();
+        month(Planet** planets);
         ~month();
-        void add_planets(Planet* planets);
+        static void set_max_time(int time);
+        void add_planets(Planet** planets);
 };
 
 #endif
