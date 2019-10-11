@@ -3,16 +3,15 @@
 
 #include"./planet.hpp"
 
-class month{
+class Month{
     private:
-        static int max_time;
         int planets_num;
         Planet** planets;
     public:
-        month(Planet** planets);
-        ~month();
-        static void set_max_time(int time);
-        void add_planets(Planet** planets);
+        Month(Planet** planets, int planets_num);
+        ~Month();
+        int get_planets_num();
+        Planet** get_planets();
 };
 
 #endif

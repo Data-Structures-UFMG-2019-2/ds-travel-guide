@@ -10,6 +10,7 @@ Planet** TravelGuide::planets = nullptr;
 int TravelGuide::max_time = 0;
 int TravelGuide::planets_num = 0;
 int TravelGuide::name_max_length = 0;
+int TravelGuide::visited = 0;
 
 void TravelGuide::read_planets(int max_time, int planets_num, int name_max_length){
     TravelGuide::planets = (Planet**) malloc(planets_num*sizeof(Planet*));
@@ -52,6 +53,29 @@ void TravelGuide::free_planets(){
 
 void TravelGuide::sort_planets(){
     quick_sort(planets, 0, TravelGuide::planets_num-1);
+}
+
+Queue<Month>* TravelGuide::visit_planets(){
+    TravelGuide::sort_planets();
+    Queue<Month>* schedule = new Queue<Month>();
+
+    while (TravelGuide::visited < TravelGuide::planets_num){
+        int time_spent = 0;
+        int begin = TravelGuide::visited;
+        int visited = 0;
+
+        for (int i = begin; i < TravelGuide::planets_num; i++){
+            Planet* planet = TravelGuide::planets[i];
+            if(time_spent + planet->get_time() > TravelGuide::max_time){
+                break;
+            }
+            time_spent += planet->get_time();
+            visited++;
+            TravelGuide::visited++;
+        }
+        schedule->add(new Month(TravelGuide::planets+begin, visited));
+    }
+    return schedule;
 }
 
 void TravelGuide::quick_sort(Planet** planets, int begin, int end){

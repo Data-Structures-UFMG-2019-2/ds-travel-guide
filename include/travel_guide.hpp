@@ -2,6 +2,8 @@
 #define TRAVEL_GUIDE_H
 
 #include"./planet.hpp"
+#include"./month.hpp"
+#include"./queue.hpp"
 
 class TravelGuide{
     private:
@@ -9,6 +11,7 @@ class TravelGuide{
         static int max_time;
         static int planets_num;
         static int name_max_length;
+        static int visited;
     public:
         TravelGuide();
         ~TravelGuide();
@@ -17,6 +20,7 @@ class TravelGuide{
         static void free_planets();
         static std::string planets_to_s();
         static void sort_planets();
+        static Queue<Month>* visit_planets();
         static void quick_sort(Planet** planets, int begin, int end);
         static int partition(Planet** planets, int begin, int end);
         static void swap_planets(int a, int b);
