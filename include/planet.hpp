@@ -12,6 +12,7 @@ class Planet {
         ~Planet();
         std::string get_name();
         int get_time();
+        std::string to_s();
 };
 
 #endif

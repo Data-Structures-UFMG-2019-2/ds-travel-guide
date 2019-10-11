@@ -9,7 +9,9 @@ int main(){
 
     while (std::cin >> max_time >> planets_num >> name_max_length){
         TravelGuide::read_planets(max_time, planets_num, name_max_length);
-        /* ... */
+        std::cout << TravelGuide::planets_to_s() << std::endl;
+        TravelGuide::sort_planets();
+        std::cout << TravelGuide::planets_to_s() << std::endl;
         TravelGuide::free_planets();
     }
 
