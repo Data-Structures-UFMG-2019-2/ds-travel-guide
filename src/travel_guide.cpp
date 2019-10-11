@@ -69,9 +69,11 @@ Queue<Month>* TravelGuide::visit_planets(){
             if(time_spent + planet->get_time() > TravelGuide::max_time){
                 break;
             }
-            time_spent += planet->get_time();
-            visited++;
-            TravelGuide::visited++;
+            else{
+                time_spent += planet->get_time();
+                visited++;
+                TravelGuide::visited++;
+            }
         }
         TravelGuide::quick_sort(TravelGuide::planets, begin, TravelGuide::visited-1, NAME);
         schedule->add(new Month(TravelGuide::planets+begin, visited));
@@ -98,7 +100,7 @@ int TravelGuide::partition(Planet** planets, int begin, int end, int sort_parame
     int random_index = end;
     Planet* pivot = planets[random_index];
     int pivot_index = begin;
-    for (int i = begin; i < end; i++){
+    for (int i = begin; i <= end; i++){
         if((planets[i]->get_time() < pivot->get_time()) && (sort_parameter == VISIT_TIME)){
             TravelGuide::swap_planets(i, pivot_index);
             pivot_index++;

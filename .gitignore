@@ -32,3 +32,8 @@ build/*.out
 build/*.app
 build/travel-guide
 build/tp2
+
+# Output logs
+build/diff_logs*
+build/output
+build/tp2.testresult
