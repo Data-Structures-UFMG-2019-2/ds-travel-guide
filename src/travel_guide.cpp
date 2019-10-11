@@ -52,7 +52,7 @@ void TravelGuide::free_planets(){
 }
 
 void TravelGuide::sort_planets(){
-    quick_sort(planets, 0, TravelGuide::planets_num-1);
+    quick_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
 }
 
 Queue<Month>* TravelGuide::visit_planets(){
@@ -73,20 +73,21 @@ Queue<Month>* TravelGuide::visit_planets(){
             visited++;
             TravelGuide::visited++;
         }
+        TravelGuide::quick_sort(TravelGuide::planets, begin, TravelGuide::visited-1, NAME);
         schedule->add(new Month(TravelGuide::planets+begin, visited));
     }
     return schedule;
 }
 
-void TravelGuide::quick_sort(Planet** planets, int begin, int end){
+void TravelGuide::quick_sort(Planet** planets, int begin, int end, int sort_parameter){
     if(begin < end){
-        int pivot_index = TravelGuide::partition(planets, begin, end);
-        TravelGuide::quick_sort(planets, begin, pivot_index-1);
-        TravelGuide::quick_sort(planets, pivot_index+1, end);
+        int pivot_index = TravelGuide::partition(planets, begin, end, sort_parameter);
+        TravelGuide::quick_sort(planets, begin, pivot_index-1, sort_parameter);
+        TravelGuide::quick_sort(planets, pivot_index+1, end, sort_parameter);
     }
 }
 
-int TravelGuide::partition(Planet** planets, int begin, int end){
+int TravelGuide::partition(Planet** planets, int begin, int end, int sort_parameter){
     /* TODO: make pivot selection random */
     // std::random_device rd;
     // std::mt19937 eng(rd());
@@ -98,7 +99,11 @@ int TravelGuide::partition(Planet** planets, int begin, int end){
     Planet* pivot = planets[random_index];
     int pivot_index = begin;
     for (int i = begin; i < end; i++){
-        if(planets[i]->get_time() < pivot->get_time()){
+        if((planets[i]->get_time() < pivot->get_time()) && (sort_parameter == VISIT_TIME)){
+            TravelGuide::swap_planets(i, pivot_index);
+            pivot_index++;
+        }
+        else if((planets[i]->get_name().compare(pivot->get_name()) < 0) && (sort_parameter == NAME)){
             TravelGuide::swap_planets(i, pivot_index);
             pivot_index++;
         }
