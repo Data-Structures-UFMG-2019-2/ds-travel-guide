@@ -36,6 +36,13 @@
         "sstream": "cpp",
         "utility": "cpp",
         "string": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "atomic": "cpp",
+        "cstddef": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+        "random": "cpp"
     }
 }

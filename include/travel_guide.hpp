@@ -23,6 +23,8 @@ class TravelGuide{
         static std::string planets_to_s();
         static void sort_planets();
         static Queue<Month>* visit_planets();
+        static void merge_sort(Planet** planets, int left, int right, int sort_parameter);
+        static void merge(Planet** planets, int left, int middle, int right, int sort_parameter);
         static void quick_sort(Planet** planets, int begin, int end, int sort_parameter);
         static int partition(Planet** planets, int begin, int end, int sort_parameter);
         static void swap_planets(int a, int b);

@@ -3,6 +3,7 @@
 #include<cassert>
 #include<sstream>
 #include<random>
+#include<cmath>
 
 #include"../include/travel_guide.hpp"
 
@@ -52,11 +53,12 @@ void TravelGuide::free_planets(){
 }
 
 void TravelGuide::sort_planets(){
-    quick_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
+    TravelGuide::merge_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
 }
 
 Queue<Month>* TravelGuide::visit_planets(){
     TravelGuide::sort_planets();
+    // std::cout << "organizou" << std::endl;
     Queue<Month>* schedule = new Queue<Month>();
 
     while (TravelGuide::visited < TravelGuide::planets_num){
@@ -75,10 +77,74 @@ Queue<Month>* TravelGuide::visit_planets(){
                 TravelGuide::visited++;
             }
         }
-        TravelGuide::quick_sort(TravelGuide::planets, begin, TravelGuide::visited-1, NAME);
+        TravelGuide::merge_sort(TravelGuide::planets, begin, TravelGuide::visited-1, NAME);
         schedule->add(new Month(TravelGuide::planets+begin, visited));
     }
     return schedule;
+}
+
+void TravelGuide::merge_sort(Planet** planets, int left, int right, int sort_parameter){
+    if(left < right){
+        int middle = left + ceil((right - left)/2);
+        // std::cout << "Meio de " << left << " e " << right << ": " << middle << std::endl;
+        TravelGuide::merge_sort(planets, left, middle, sort_parameter);
+        TravelGuide::merge_sort(planets, middle + 1, right, sort_parameter);
+        TravelGuide::merge(planets, left, middle, right, sort_parameter);
+    }
+}
+
+void TravelGuide::merge(Planet** planets, int left, int middle, int right, int sort_parameter){
+    int i, j, k; 
+    int size_left = (middle - left) + 1; 
+    int size_right =  (right - middle); 
+    Planet **left_array, **right_array;
+
+    left_array = (Planet**) malloc(size_left*sizeof(Planet*));
+    right_array = (Planet**) malloc(size_right*sizeof(Planet*)); 
+  
+    for (i = 0; i < size_left; i++) {
+        left_array[i] = planets[left + i]; 
+    }
+    for (j = 0; j < size_right; j++){
+        right_array[j] = planets[middle + 1 + j]; 
+    }
+
+    i = 0;
+    j = 0;
+    k = left;
+    while (i < size_left && j < size_right) { 
+        if(sort_parameter == VISIT_TIME){
+            if (left_array[i]->get_time() <= right_array[j]->get_time()) { 
+                planets[k] = left_array[i]; 
+                i++; 
+            } 
+            else{ 
+                planets[k] = right_array[j]; 
+                j++; 
+            } 
+        }
+        else if(sort_parameter == NAME){
+            if (left_array[i]->get_name().compare(right_array[j]->get_name()) <= 0) { 
+                planets[k] = left_array[i]; 
+                i++; 
+            } 
+            else{ 
+                planets[k] = right_array[j]; 
+                j++; 
+            } 
+        }
+        k++; 
+    }
+    while (i < size_left) { 
+        planets[k] = left_array[i]; 
+        i++; 
+        k++; 
+    }
+    while (j < size_right) { 
+        planets[k] = right_array[j]; 
+        j++; 
+        k++; 
+    } 
 }
 
 void TravelGuide::quick_sort(Planet** planets, int begin, int end, int sort_parameter){
