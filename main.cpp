@@ -7,11 +7,12 @@
 
 int main(){
     int max_time = 0, planets_num = 0, name_max_length = 0;
+    Queue<Month>* schedule;
 
     while (std::cin >> max_time >> planets_num >> name_max_length){
         TravelGuide::read_planets(max_time, planets_num, name_max_length);
         // std::cout << TravelGuide::planets_to_s() << std::endl;
-        Queue<Month>* schedule = TravelGuide::visit_planets();
+        schedule = TravelGuide::visit_planets();
         for (int i = 0; schedule->length() > 0; i++){
             Month* month = schedule->remove();
             Planet** planets = month->get_planets();
@@ -20,9 +21,9 @@ int main(){
             }
             delete month;   
         }
-        // std::cout << TravelGuide::planets_to_s() << std::endl;
         TravelGuide::free_planets();
     }
+    delete schedule;
 
     return 0;
 }

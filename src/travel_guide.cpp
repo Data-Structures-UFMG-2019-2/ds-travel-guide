@@ -58,7 +58,6 @@ void TravelGuide::sort_planets(){
 
 Queue<Month>* TravelGuide::visit_planets(){
     TravelGuide::sort_planets();
-    // std::cout << "organizou" << std::endl;
     Queue<Month>* schedule = new Queue<Month>();
 
     while (TravelGuide::visited < TravelGuide::planets_num){
@@ -86,7 +85,6 @@ Queue<Month>* TravelGuide::visit_planets(){
 void TravelGuide::merge_sort(Planet** planets, int left, int right, int sort_parameter){
     if(left < right){
         int middle = left + ceil((right - left)/2);
-        // std::cout << "Meio de " << left << " e " << right << ": " << middle << std::endl;
         TravelGuide::merge_sort(planets, left, middle, sort_parameter);
         TravelGuide::merge_sort(planets, middle + 1, right, sort_parameter);
         TravelGuide::merge(planets, left, middle, right, sort_parameter);
@@ -144,7 +142,9 @@ void TravelGuide::merge(Planet** planets, int left, int middle, int right, int s
         planets[k] = right_array[j]; 
         j++; 
         k++; 
-    } 
+    }
+    free(left_array);
+    free(right_array);
 }
 
 void TravelGuide::quick_sort(Planet** planets, int begin, int end, int sort_parameter){
