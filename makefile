@@ -32,4 +32,5 @@ mem:
 	valgrind --leak-check=full --show-leak-kinds=all $(BUILD_PATH)/$(TARGET_NAME) < ./tests/14.in
 
 test: $(TARGET_NAME)
+	mkdir -p ./output
 	@bash run_tests.sh $(BUILD_PATH)/$(TARGET_NAME) $(TMPOUT_NAME)

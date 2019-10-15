@@ -34,6 +34,6 @@ build/travel-guide
 build/tp2
 
 # Output logs
-build/diff_logs*
-build/output
-build/tp2.testresult
+output/diff_logs*
+output/output_log
+output/tp2.testresult
