@@ -52,12 +52,24 @@ void TravelGuide::free_planets(){
     free(TravelGuide::planets);
 }
 
-void TravelGuide::sort_planets(){
-    TravelGuide::merge_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
+void TravelGuide::sort_planets(int algorithm){
+    switch (algorithm){
+        case MERGESORT:
+            TravelGuide::merge_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
+            break;
+
+        case QUICKSORT:
+            TravelGuide::quick_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
+            break;
+        
+        default:
+            TravelGuide::quick_sort(planets, 0, TravelGuide::planets_num-1, VISIT_TIME);
+            break;
+    }
 }
 
 Queue<Month>* TravelGuide::visit_planets(){
-    TravelGuide::sort_planets();
+    TravelGuide::sort_planets(MERGESORT);
     Queue<Month>* schedule = new Queue<Month>();
 
     while (TravelGuide::visited < TravelGuide::planets_num){
@@ -80,6 +92,18 @@ Queue<Month>* TravelGuide::visit_planets(){
         schedule->add(new Month(TravelGuide::planets+begin, visited));
     }
     return schedule;
+}
+
+void TravelGuide::print_schedule(Queue<Month>* schedule){
+    for (int i = 0; schedule->length() > 0; i++){
+        Month* month = schedule->remove();
+        Planet** planets = month->get_planets();
+        for (int j = 0; j < month->get_planets_num(); j++){
+            std::cout << i+1 << ' ' << planets[j]->get_name() << ' ' << planets[j]->get_time() << std::endl;
+        }
+        delete month;   
+    }
+    delete schedule;
 }
 
 void TravelGuide::merge_sort(Planet** planets, int left, int right, int sort_parameter){
