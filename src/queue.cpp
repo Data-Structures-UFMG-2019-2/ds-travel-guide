@@ -4,6 +4,7 @@
 
 #include"../include/queue.hpp"
 #include"../include/month.hpp"
+#include"../include/planet.hpp"
 
 template<class T>
 Queue<T>::Queue(){
@@ -88,3 +89,4 @@ void Queue<T>::clear(int strategy){
 }
 
 template class Queue<Month>;
+template class Queue<Planet>;

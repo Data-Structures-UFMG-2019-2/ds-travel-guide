@@ -1,5 +1,6 @@
 #include "../include/cell.hpp"
 #include "../include/month.hpp"
+#include "../include/planet.hpp"
 
 template<class T>
 Cell<T>::Cell(T* object){
@@ -55,3 +56,4 @@ void Cell<T>::cascade_clear(int direction){
 }
 
 template class Cell<Month>;
+template class Cell<Planet>;

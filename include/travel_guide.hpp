@@ -1,11 +1,10 @@
 #ifndef TRAVEL_GUIDE_H
 #define TRAVEL_GUIDE_H
 
-#define VISIT_TIME 1
-#define NAME (-1)
-
 #define QUICKSORT 1
 #define MERGESORT (-1)
+
+#define ALPHABET 26
 
 #include"./planet.hpp"
 #include"./month.hpp"
@@ -28,10 +27,11 @@ class TravelGuide{
         static void sort_planets(int algorithm);
         static Queue<Month>* visit_planets();
         static void print_schedule(Queue<Month>* schedule); // Destroys the schedule
-        static void merge_sort(Planet** planets, int left, int right, int sort_parameter);
-        static void merge(Planet** planets, int left, int middle, int right, int sort_parameter);
-        static void quick_sort(Planet** planets, int begin, int end, int sort_parameter);
-        static int partition(Planet** planets, int begin, int end, int sort_parameter);
+        static void radix_sort(Planet** planets, int length);
+        static void merge_sort(Planet** planets, int left, int right);
+        static void merge(Planet** planets, int left, int middle, int right);
+        static void quick_sort(Planet** planets, int begin, int end);
+        static int partition(Planet** planets, int begin, int end);
         static void swap_planets(int a, int b);
 };
 
