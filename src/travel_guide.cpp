@@ -126,7 +126,7 @@ void TravelGuide::radix_sort(Planet** planets, int length){
     for (int i = 0; i < ALPHABET; i++){
         delete count_vector[i];
     }
-    delete count_vector;
+    free(count_vector);
 }
 
 void TravelGuide::merge_sort(Planet** planets, int left, int right){

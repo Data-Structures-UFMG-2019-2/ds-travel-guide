@@ -29,7 +29,7 @@ run:
 	$(BUILD_PATH)/$(TARGET_NAME)
 
 mem:
-	valgrind --leak-check=full --show-leak-kinds=all $(BUILD_PATH)/$(TARGET_NAME) < ./tests/14.in
+	valgrind --leak-check=full --show-leak-kinds=all $(BUILD_PATH)/$(TARGET_NAME) < ./tests/14.in > ./output/mem.log
 
 test: $(TARGET_NAME)
 	mkdir -p ./output

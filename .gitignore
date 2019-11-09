@@ -37,3 +37,4 @@ build/tp2
 output/diff_logs*
 output/output_log
 output/tp2.testresult
+output/mem.log
